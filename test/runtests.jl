@@ -12,3 +12,5 @@ using Base.Test
 ## Test io.jl
 
 ## Test search.jl
+
+## Test flow.jl
