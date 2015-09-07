@@ -9,8 +9,8 @@ import NetworkFlows.zero_to_one!
 @test zero_to_one!([(3,1,0.),(1,2,-2.1)]) != [(3,1,0.),(1,2,-2.1)]
 
 import NetworkFlows.Arc, NetworkFlows.ghostArc, NetworkFlows.simpleArc
-@test Arc(0,1,0.) == ghostArc(1)
-@test Arc(0,2,1.) == ghostArc(2)
+@test isequal(Arc(0,1,0.), ghostArc(1))
+@test Arc(0,2,1.) == simpleArc(2)
 
 ## Test network.jl
 
