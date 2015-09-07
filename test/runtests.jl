@@ -14,3 +14,5 @@ using Base.Test
 ## Test search.jl
 
 ## Test flow.jl
+
+## Test cut.jl
