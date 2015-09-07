@@ -10,3 +10,5 @@ using Base.Test
 ## Test network.jl
 
 ## Test io.jl
+
+## Test search.jl
