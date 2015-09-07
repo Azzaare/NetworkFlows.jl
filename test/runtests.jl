@@ -8,3 +8,5 @@ using Base.Test
 @test zero_to_one!([(3,1,0.),(1,2,-2.1)]) != [(3,1,0.),(1,2,-2.1)]
 
 ## Test network.jl
+
+## Test io.jl
