@@ -16,11 +16,13 @@ function zero_to_one!(links::Vector{Link})
   for (id,a) in enumerate(links)
     links[id] = (a[1] + 1, a[2] + 1, a[3])
   end
+  return links
 end
 function zero_to_one!(links::Vector{SimpleLink})
   for (id,a) in enumerate(links)
     links[id] = (a[1] + 1, a[2] + 1)
   end
+  return links
 end
 
 function addReverseLinks(links::Vector{Link})
