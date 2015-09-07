@@ -1,5 +1,5 @@
 module NetworkFlows
 
-# package code goes here
+include("links.jl")
 
 end # module
