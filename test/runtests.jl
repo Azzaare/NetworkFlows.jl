@@ -34,6 +34,8 @@ g3 = Network(edges_list, true, 1, 6)
 print(g3)
 
 ## Test search.jl
+import NetworkFlows.bfs
+println(bfs(g3,:Path))
 
 ## Test flow.jl
 
