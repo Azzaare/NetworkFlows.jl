@@ -43,6 +43,9 @@ import NetworkFlows.edmondsKarp, NetworkFlows.connectivity
 import NetworkFlows.kishimoto
 @test edmondsKarp(g3)[1] == 12
 @test connectivity(g3) == 4
-@test kishimoto(g3,3)[1] == 3
+@test kishimoto(g3,4)[1] == 1.25
+@test kishimoto(g3,3)[1] == 7.5
+@test kishimoto(g3,2)[1] == 12
+@test kishimoto(g3,1)[1] == edmondsKarp(g3)[1]
 
 ## Test cut.jl
