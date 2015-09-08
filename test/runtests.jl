@@ -53,4 +53,5 @@ g4 = Network(edges2,true,1,6)
 
 ## Test cut.jl
 import NetworkFlows.mincut
-@test mincut(g3) == edmondsKarp(g3)
+@test mincut(g3)[1] == edmondsKarp(g3)[1]
+@test mincut(g3)[2] != edmondsKarp(g3)[2]
