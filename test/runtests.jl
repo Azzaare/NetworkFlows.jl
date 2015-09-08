@@ -34,15 +34,23 @@ zero_to_one!(edges1)
 g3 = Network(edges1, true, 1, 6)
 print(g3)
 
+import NetworkFlows.orderedDIMACS
+orderedDIMACS(pwd()*"/ioexample/unordereddimacs",
+  pwd()*"/ioexample/ordereddimacs")
+gdimacs = Network(pwd()*"/ioexample/ordereddimacs",:DIMACS)
+gcsv = Network(pwd()*"/ioexample/csv",:CSV,(1,6))
+
 ## Test search.jl
 import NetworkFlows.bfs
-println(bfs(g3,:Path))
+println("BFS: ",bfs(g3,:Path))
 
 ## Test flow.jl
 import NetworkFlows.edmondsKarp, NetworkFlows.connectivity
 import NetworkFlows.kishimoto
 @test edmondsKarp(g3)[1] == 12
 @test connectivity(g3) == 4
+@test edmondsKarp(gdimacs)[1] == 15
+@test edmondsKarp(gcsv)[1] == 15
 edges2 =
 [(1,2,1.),(1,3,2.),(1,4,4.),(1,5,8.),(2,6,1.),(3,6,2.),(4,6,4.),(5,6,8.)]
 g4 = Network(edges2,true,1,6)
@@ -53,4 +61,5 @@ g4 = Network(edges2,true,1,6)
 
 ## Test cut.jl
 import NetworkFlows.mincut
-@test mincut(g3) == edmondsKarp(g3)
+@test mincut(g3)[1] == edmondsKarp(g3)[1]
+@test mincut(g3)[2] != edmondsKarp(g3)[2]
