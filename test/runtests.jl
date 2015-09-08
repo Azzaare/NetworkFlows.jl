@@ -28,10 +28,10 @@ g2 = Network(2,1,[1,2,2],[simpleArc(2)])
 
 ## Test io.jl
 import NetworkFlows.print
-edges_list = [(0,1,5.),(0,2,7.),(0,5,1.75),(0,6,1.3),(1,3,2.),(2,1,1.),
+edges1 = [(0,1,5.),(0,2,7.),(0,5,1.75),(0,6,1.3),(1,3,2.),(2,1,1.),
   (2,3,11.),(2,4,8.),(3,5,6.),(4,5,3.),(6,5,1.25)]
-zero_to_one!(edges_list)
-g3 = Network(edges_list, true, 1, 6)
+zero_to_one!(edges1)
+g3 = Network(edges1, true, 1, 6)
 print(g3)
 
 ## Test search.jl
@@ -43,9 +43,12 @@ import NetworkFlows.edmondsKarp, NetworkFlows.connectivity
 import NetworkFlows.kishimoto
 @test edmondsKarp(g3)[1] == 12
 @test connectivity(g3) == 4
-@test kishimoto(g3,4)[1] == 1.25
-@test kishimoto(g3,3)[1] == 7.5
-@test kishimoto(g3,2)[1] == 12
-@test kishimoto(g3,1)[1] == edmondsKarp(g3)[1]
+edges2 =
+[(1,2,1.),(1,3,2.),(1,4,4.),(1,5,8.),(2,6,1.),(3,6,2.),(4,6,4.),(5,6,8.)]
+g4 = Network(edges2,true,1,6)
+@test kishimoto(g4,1)[1] == edmondsKarp(g4)[1]
+@test kishimoto(g4,2)[1] == 14.
+@test kishimoto(g4,3)[1] == 9.
+@test kishimoto(g4,4)[1] == 4.
 
 ## Test cut.jl
