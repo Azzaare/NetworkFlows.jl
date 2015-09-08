@@ -35,10 +35,10 @@ g3 = Network(edges1, true, 1, 6)
 print(g3)
 
 import NetworkFlows.orderedDIMACS
-orderedDIMACS(pwd()*"/ioexample/unordereddimacs",
-  pwd()*"/ioexample/ordereddimacs")
-gdimacs = Network(pwd()*"/ioexample/ordereddimacs",:DIMACS)
-gcsv = Network(pwd()*"/ioexample/csv",:CSV,(1,6))
+orderedDIMACS(pwd()*"/../ioexample/unordereddimacs",
+  pwd()*"/../ioexample/ordereddimacs")
+gdimacs = Network(pwd()*"/../ioexample/ordereddimacs",:DIMACS)
+gcsv = Network(pwd()*"/../ioexample/csv",:CSV,(1,6))
 
 ## Test search.jl
 import NetworkFlows.bfs
