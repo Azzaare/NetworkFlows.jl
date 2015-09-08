@@ -39,7 +39,7 @@ import NetworkFlows.bfs
 println(bfs(g3,:Path))
 
 ## Test flow.jl
-import NetworkFlows.edmondsKarp, NetworkFlows.connectivity,
+import NetworkFlows.edmondsKarp, NetworkFlows.connectivity
 import NetworkFlows.kishimoto
 @test edmondsKarp(g3)[1] == 12
 @test connectivity(g3) == 4
