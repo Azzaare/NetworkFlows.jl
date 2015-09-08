@@ -28,7 +28,8 @@ g2 = Network(2,1,[1,2,2],[simpleArc(2)])
 
 ## Test io.jl
 import NetworkFlows.print
-edges_list = [(0,1,5.),(0,2,7.),(0,5,1.75),(0,6,1.3),(1,3,2.),(2,1,1.),(2,3,11.),(2,4,8.),(3,5,6.),(4,5,3.),(6,5,1.25)]
+edges_list = [(0,1,5.),(0,2,7.),(0,5,1.75),(0,6,1.3),(1,3,2.),(2,1,1.),
+  (2,3,11.),(2,4,8.),(3,5,6.),(4,5,3.),(6,5,1.25)]
 zero_to_one!(edges_list)
 g3 = Network(edges_list, true, 1, 6)
 print(g3)
@@ -38,5 +39,10 @@ import NetworkFlows.bfs
 println(bfs(g3,:Path))
 
 ## Test flow.jl
+import NetworkFlows.edmondsKarp, NetworkFlows.connectivity,
+import NetworkFlows.kishimoto
+@test edmondsKarp(g3)[1] == 12
+@test connectivity(g3) == 4
+@test kishimoto(g3,3)[1] == 3
 
 ## Test cut.jl
