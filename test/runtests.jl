@@ -52,3 +52,5 @@ g4 = Network(edges2,true,1,6)
 @test kishimoto(g4,4)[1] == 4.
 
 ## Test cut.jl
+import NetworkFlows.mincut
+@test mincut(g3) == edmondsKarp(g3)
