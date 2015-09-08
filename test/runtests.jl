@@ -17,6 +17,7 @@ import NetworkFlows.Arc, NetworkFlows.ghostArc, NetworkFlows.simpleArc
 @test Arc(0,2,1.).cap == simpleArc(2).cap
 
 ## Test network.jl
+import NetworkFlows.Network, NetworkFlows.findArc
 g1 = Network(1,2,[1,2,2],[Arc(0,2,1.)])
 g2 = Network(2,1,[1,2,2],[simpleArc(2)])
 @test g1.source == g2.target
