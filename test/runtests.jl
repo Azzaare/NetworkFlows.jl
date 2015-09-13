@@ -63,3 +63,7 @@ g4 = Network(edges2,true,1,6)
 import NetworkFlows.mincut
 @test mincut(g3)[1] == edmondsKarp(g3)[1]
 @test mincut(g3)[2] != edmondsKarp(g3)[2]
+
+# Test extmrflow
+import NetworkFlows.breakingPoints
+breakingPoints(g4)

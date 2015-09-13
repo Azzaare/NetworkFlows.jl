@@ -6,5 +6,6 @@ include("io.jl")
 include("search.jl")
 include("flow.jl")
 include("cut.jl")
+include("extmrflow.jl")
 
 end # module

@@ -5,6 +5,7 @@ function mincut(g::Network, request = :EdmondsKarp)
   if request == :EdmondsKarp
     val, flows = edmondsKarp(g)
   end
+
   cut = bfs(g,:MinCut,flows)
   return val, cut
 end

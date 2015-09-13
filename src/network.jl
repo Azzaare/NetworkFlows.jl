@@ -16,3 +16,12 @@ function findArc(g::Network,t::Int,h::Int)
   end
   return 0
 end
+
+function minmaxCapacity(g::Network)
+  cmin, cmax = typemax(Float64), 0.
+  for a in g.links
+    cmin = min(cmin,a.cap)
+    cmax = max(cmax,a.cap)
+  end
+  return cmin, cmax
+end

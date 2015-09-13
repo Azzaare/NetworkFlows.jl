@@ -25,6 +25,26 @@ function print(g::Network)
   print(str)
 end
 
+function printFull(g::Network)
+  n = length(g.tails) - 1
+  m = 0
+  str = string()
+  for (id,start) in enumerate(g.tails[1:n])
+    stop = g.tails[id+1] - 1
+    str *= "node $id :"
+    for a in g.links[start:stop]
+      aux = (a.head,a.cap)
+      str *= " $aux"
+      m += 1
+    end
+    str *= "\n"
+  end
+  str2 = "The network has $n nodes and $m links."
+  str2 *= "The source node is $(g.source) and the sink node is $(g.target).\n"
+  str = str2 * str
+  print(str)
+end
+
 # Network input in natural graph description
 function Network(links::Vector{Link}, directed::Bool, s::Int, t::Int)
   if directed
