@@ -96,7 +96,7 @@ function Network(links::Vector{SimpleLink}, directed::Bool, s::Int, t::Int)
 end
 
 # DIMACS format input
-function orderedDIMACS(fname::String, foutput = "")
+function orderedDIMACS(fname::AbstractString, foutput = "")
   # Init Strings
   comments = Vector{String}()
   links = Vector{Link}()
@@ -161,7 +161,7 @@ function orderedDIMACS(fname::String, foutput = "")
   end
 end
 
-function dimacsNetwork(fname::String)
+function dimacsNetwork(fname::AbstractString)
   links = Vector{Link}()
   source = 0
   sink = 0
@@ -188,7 +188,7 @@ function dimacsNetwork(fname::String)
   Network(links, directed, source, sink)
 end
 
-function csvNetwork(fname::String, source::Int, sink::Int)
+function csvNetwork(fname::AbstractString, source::Int, sink::Int)
   links = Vector{Link}()
   directed = true
 
@@ -199,7 +199,7 @@ function csvNetwork(fname::String, source::Int, sink::Int)
   Network(links,directed,source,sink)
 end
 
-function Network(fname::String,format::Symbol, st = (1,2) )
+function Network(fname::AbstractString,format::Symbol, st = (1,2) )
   if format == :DIMACS
     dimacsNetwork(fname)
   elseif format == :CSV
