@@ -98,7 +98,7 @@ end
 # DIMACS format input
 function orderedDIMACS(fname::AbstractString, foutput = "")
   # Init Strings
-  comments = Vector{String}()
+  comments = Vector{AbstractString}()
   links = Vector{Link}()
   linklines = Vector{Int}()
   problem_line = 0
