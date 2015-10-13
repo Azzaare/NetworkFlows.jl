@@ -52,7 +52,7 @@ import NetworkFlows.kishimoto
 @test edmondsKarp(gdimacs)[1] == 15
 @test edmondsKarp(gcsv)[1] == 15
 edges2 =
-[(1,2,1.),(1,3,2.),(1,4,4.),(1,5,8.),(2,6,1.),(3,6,2.),(4,6,4.),(5,6,8.)]
+[(1,2,10.),(1,3,20.),(1,4,40.),(1,5,80.),(2,6,1.),(3,6,2.),(4,6,4.),(5,6,8.)]
 g4 = Network(edges2,true,1,6)
 @test kishimoto(g4,1)[1] == edmondsKarp(g4)[1]
 @test kishimoto(g4,2)[1] == 14.
@@ -66,4 +66,4 @@ import NetworkFlows.mincut
 
 # Test extmrflow
 import NetworkFlows.breakingPoints
-breakingPoints(g4)
+breakingPoints(g4) == [(0.0,0.0),(1.0,4.0),(2.0,7.0),(4.0,11.0),(8.0,15.0)]

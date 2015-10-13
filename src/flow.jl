@@ -3,7 +3,7 @@
 # Classical max-flow algorithm
 function edmondsKarp(g::Network)
   flows = zeros(length(g.links))
-  flow = 0
+  flow = 0.0
 
   while true
     u = g.source

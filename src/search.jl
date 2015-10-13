@@ -55,7 +55,8 @@ function bfsMinCut(g::Network, flows = zeros(length(g.links)))
   for (tail,v) in enumerate(g.tails[1:n])
     for (id,a) in enumerate(g.links[g.tails[tail]:(g.tails[tail+1]-1)])
       if (colors[tail] - colors[a.head] == 2)
-        push!(cutedges,g.links[id+v-1].sym)
+#        push!(cutedges,g.links[id+v-1].sym)
+       push!(cutedges,id+v-1)
       end
     end
   end

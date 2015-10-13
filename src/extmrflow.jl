@@ -4,11 +4,7 @@
 function getSlope(g::Network,restriction::Float64,cutedges::Vector{Int})
   slope = 0
   for id in cutedges
-    println(id)
-    println(g.links)
-    println(g.links[id].cap, " ", restriction)
     if g.links[id].cap > restriction
-      println(id)
       slope += 1
     end
   end
@@ -36,9 +32,9 @@ function intersection(x1,y1,a1,x2,y2,a2)
   b2 = y2 - a2 * x2
   x = (b2 - b1)/(a1 - a2)
   y = a1 * x + b1
-  println("$y1 = $a1 * $x1 + $b1")
-  println("$y2 = $a2 * $x2 + $b2")
-  println("x=$x y=$y")
+#  println("$y1 = $a1 * $x1 + $b1")
+#  println("$y2 = $a2 * $x2 + $b2")
+#  println("x=$x y=$y")
   return (x,y)
 end
 
@@ -55,8 +51,6 @@ function auxiliary_points(g::Network)
 
   fmax, smax = getFlowSlope(g,g,resmax)
   auxpoints[λ + 1 - smax] = (resmax,fmax)
-  printFull(g)
-  println(smin, " ",smax)
   if smin > smax + 1
     queue = [((fmin,smin,resmin),(fmax,smax,resmax))]
   end
@@ -82,7 +76,6 @@ end
 
 function breakingPoints(g::Network)
   auxpoints = auxiliary_points(g)
-  println(auxpoints)
   λ = length(auxpoints)
   breakingpoints = Vector{Tuple{Float64,Float64}}()
   left_index = 1
