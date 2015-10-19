@@ -29,8 +29,9 @@ The network/graph structure used in *NetworkFlows.jl* tries to optimize the acce
 Examples of use are given in the test/runtest.jl
 
 To get started with a simple graph:
-edges = [(1,2,2.),(1,3,3.),(1,4,5.),(2,5,2.),(3,5,3.),(4,5,5.),
-    (5,6,3.),(5,7,3.),(5,8,3.),(6,9,3.),(7,9,3.),(8,9,3.),
-    (9,10,7.),(9,11,7.),(10,12,7.),(11,12,7.)]
+
+edges = [(1,2,2.),(1,3,3.),(1,4,5.),(2,5,2.),(3,5,3.),(4,5,5.),(5,6,3.),(5,7,3.),(5,8,3.),(6,9,3.),(7,9,3.),(8,9,3.),(9,10,7.),(9,11,7.),(10,12,7.),(11,12,7.)]
+
   g = Network(edges,true,1,12)
+
   mixedMLA(g)
