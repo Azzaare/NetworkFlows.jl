@@ -42,8 +42,11 @@ function bfsMinCut(g::Network, flows = zeros(length(g.links)))
 
   while !isempty(queue)
     v = pop!(queue)
+#    println(g.links[g.tails[v]:(g.tails[v+1]-1)])
     for (id,e) in enumerate(g.links[g.tails[v]:(g.tails[v+1]-1)])
-      if (e.cap > flows[id]) && (colors[e.head] == 0)
+#      println("colors[e.head]",colors[e.head])
+#      println("e.cap > flows[id]",e.cap > flows[g.tails[v] + id - 1])
+      if (e.cap > flows[g.tails[v] + id - 1]) && (colors[e.head] == 0)
         colors[v]=1
         q = e.head
         push!(queue,q)
@@ -51,6 +54,9 @@ function bfsMinCut(g::Network, flows = zeros(length(g.links)))
     end
     colors[v] = 2
   end
+
+#  println(colors)
+#  printflow(g,flows)
 
   for (tail,v) in enumerate(g.tails[1:n])
     for (id,a) in enumerate(g.links[g.tails[tail]:(g.tails[tail+1]-1)])

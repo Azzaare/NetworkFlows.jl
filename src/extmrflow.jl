@@ -13,7 +13,7 @@ end
 function getFlowSlope(g::Network,g0::Network,restriction::Float64)
   flow, cutedges = mincut(g)
   slope = getSlope(g0,restriction,cutedges)
-  return flow, slope
+  return flow, slope, cutedges
 end
 
 
@@ -42,15 +42,21 @@ function auxiliary_points(g::Network)
   λ = round(Int,connectivity(g))
   n = length(g.tails)
   auxpoints = fill((0.,0.),λ+1)
+  cuts = Vector{Vector{Int}}()
 
   resmin, resmax = minmaxCapacity(g)
   resmin = resmin/2.
   gmin = restriction(resmin,g)
-  fmin, smin = getFlowSlope(gmin,g,resmin)
+#  print(gmin)
+  fmin, smin, cutedges = getFlowSlope(gmin,g,resmin)
+#  println("smin=",smin,", resmin=",resmin,", fmin=",fmin,", λ=",λ)
   auxpoints[λ + 1 - smin] = (resmin,fmin)
+  push!(cuts,cutedges)
 
-  fmax, smax = getFlowSlope(g,g,resmax)
+  fmax, smax, cutedges = getFlowSlope(g,g,resmax)
   auxpoints[λ + 1 - smax] = (resmax,fmax)
+  push!(cuts,cutedges)
+
   if smin > smax + 1
     queue = [((fmin,smin,resmin),(fmax,smax,resmax))]
   end
@@ -59,8 +65,9 @@ function auxiliary_points(g::Network)
     (f1,s1,r1),(f2,s2,r2) = pop!(queue)
     res, expectslope = intersection(r1,f1,s1,r2,f2,s2)
     g_res = restriction(res,g)
-    f_res, s_res = getFlowSlope(g_res,g,res)
+    f_res, s_res, cutedges = getFlowSlope(g_res,g,res)
     auxpoints[λ + 1 - s_res] = (res,f_res)
+    push!(cuts,cutedges)
 
     if (s1 > s_res + 1) && ((r2,f2) != (res,f_res))
       q = (f1,s1,r1),(f_res,s_res,res)
@@ -71,28 +78,57 @@ function auxiliary_points(g::Network)
       push!(queue,q)
     end
   end
-  return auxpoints
+  return auxpoints, cuts
 end
 
 function breakingPoints(g::Network)
-  auxpoints = auxiliary_points(g)
-  λ = length(auxpoints)
-  breakingpoints = Vector{Tuple{Float64,Float64}}()
+  auxpoints, cuts = auxiliary_points(g)
+  λ = length(auxpoints) - 1
+  breakingpoints = Vector{Tuple{Float64,Float64,Int}}()
   left_index = 1
-  left_slope = λ  # Init step, so equal to lambda for the first computation
 
   for (id,p) in enumerate(auxpoints)
     if id == 1
-      push!(breakingpoints,(0.,0.))
+      push!(breakingpoints,(0.,0.,λ))
     else
       p_left = breakingpoints[left_index]
+#      println("p=",p)
       if p[1] != 0
-        inter = intersection(p_left[1],p_left[2],left_slope,p[1],p[2], λ - id)
-        push!(breakingpoints,inter)
+        interx, intery = intersection(p_left[1],p_left[2],p_left[3],p[1],p[2], λ + 1 - id)
+        push!(breakingpoints,(interx,intery,λ + 1 - id))
         left_index += 1
+      else
+        push!(breakingpoints,(-1.,-1.,λ + 1 - id))
       end
     end
-    left_slope -= 1
   end
+#  println(auxpoints)
+#  println(breakingpoints)
   return breakingpoints
+end
+
+function breakingPointsCuts(g::Network)
+  auxpoints, cuts = auxiliary_points(g)
+  λ = length(auxpoints) - 1
+  breakingpoints = Vector{Tuple{Float64,Float64,Int}}()
+  left_index = 1
+
+  for (id,p) in enumerate(auxpoints)
+    if id == 1
+      push!(breakingpoints,(0.,0.,λ))
+    else
+      p_left = breakingpoints[left_index]
+#      println("p=",p)
+      if p[1] != 0
+        interx, intery = intersection(p_left[1],p_left[2],p_left[3],p[1],p[2], λ + 1 - id)
+        push!(breakingpoints,(interx,intery,λ + 1 - id))
+        left_index += 1
+      else
+        push!(breakingpoints,(-1.,-1.,λ + 1 - id))
+      end
+    end
+  end
+#  println(auxpoints)
+#  println(breakingpoints)
+  return breakingpoints, cuts
 end

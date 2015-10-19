@@ -45,6 +45,13 @@ function printFull(g::Network)
   print(str)
 end
 
+function printflow(g::Network, flows::Vector{Float64})
+  for (id,e) in enumerate(g.links)
+    esym = g.links[e.sym]
+    println("e",id,": ",esym.head,"->",e.head,"=",flows[id],"/",e.cap)
+  end
+end
+
 # Network input in natural graph description
 function Network(links::Vector{Link}, directed::Bool, s::Int, t::Int)
   if directed

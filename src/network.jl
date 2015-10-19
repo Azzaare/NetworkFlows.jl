@@ -20,7 +20,9 @@ end
 function minmaxCapacity(g::Network)
   cmin, cmax = typemax(Float64), 0.
   for a in g.links
-    cmin = min(cmin,a.cap)
+    if a.cap != 0.
+      cmin = min(cmin,a.cap)
+    end
     cmax = max(cmax,a.cap)
   end
   return cmin, cmax

@@ -66,4 +66,19 @@ import NetworkFlows.mincut
 
 # Test extmrflow
 import NetworkFlows.breakingPoints
-breakingPoints(g4) == [(0.0,0.0),(1.0,4.0),(2.0,7.0),(4.0,11.0),(8.0,15.0)]
+@test breakingPoints(g4) ==
+  [(0.,0.,4),(1.0,4.0,3),(2.0,7.0,2),(4.0,11.0,1),(8.0,15.0,0)]
+edges3 =
+[(1,2,10.),(1,3,20.),(1,4,40.),(1,5,80.),(2,6,2.),(3,6,2.),(4,6,2.),(5,6,8.)]
+g5 = Network(edges3,true,1,6)
+@test breakingPoints(g5) ==
+  [(0.0,0.0,4),(-1.0,-1.0,3),(-1.0,-1.0,2),(2.0,8.0,1),(4.0,14.0,0)]
+
+  # Test mla.jl
+  import NetworkFlows.mixedMLA, NetworkFlows.successMLA
+  edges4 = [(1,2,2.),(1,3,3.),(1,4,5.),(2,5,2.),(3,5,3.),(4,5,5.),
+    (5,6,3.),(5,7,3.),(5,8,3.),(6,9,3.),(7,9,3.),(8,9,3.),
+    (9,10,7.),(9,11,7.),(10,12,7.),(11,12,7.)]
+  g6 = Network(edges4,true,1,12)
+  @test mixedMLA(g6) == [(4.5,6.0),(9.0,9.0)]
+  @test successMLA(g6) == 0.5
