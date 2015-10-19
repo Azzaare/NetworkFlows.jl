@@ -1,3 +1,3 @@
 # NetworkFlows
 
-[![Build Status](https://travis-ci.org/azzaare/NetworkFlows.jl.svg?branch=master)](https://travis-ci.org/azzaare/NetworkFlows.jl)
+[![Build Status](https://travis-ci.org/Azzaare/NetworkFlows.jl.svg?branch=master)](https://travis-ci.org/Azzaare/NetworkFlows.jl)
