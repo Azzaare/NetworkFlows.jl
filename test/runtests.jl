@@ -2,7 +2,7 @@ using NetworkFlows
 using Base.Test
 
 ## Test link.jl ##
-import NetworkFlows.zero_to_one!
+#import NetworkFlows.zero_to_one!
 @test zero_to_one!([(0,1),(1,2)]) == [(1,2),(2,3)]
 @test zero_to_one!([(3,1),(1,2)]) != [(3,1),(1,2)]
 @test zero_to_one!([(0,1,1.),(1,2,2.)]) == [(1,2,1.),(2,3,2.)]
@@ -27,7 +27,7 @@ g2 = Network(2,1,[1,2,2],[simpleArc(2)])
 @test findArc(g1,1,2) == findArc(g2,1,2)
 
 ## Test io.jl
-import NetworkFlows.print
+#import NetworkFlows.print
 edges1 = [(0,1,5.),(0,2,7.),(0,5,1.75),(0,6,1.3),(1,3,2.),(2,1,1.),
   (2,3,11.),(2,4,8.),(3,5,6.),(4,5,3.),(6,5,1.25)]
 zero_to_one!(edges1)
@@ -60,7 +60,7 @@ g4 = Network(edges2,true,1,6)
 @test kishimoto(g4,4)[1] == 4.
 
 ## Test cut.jl
-import NetworkFlows.mincut
+#import NetworkFlows.mincut
 @test mincut(g3)[1] == edmondsKarp(g3)[1]
 @test mincut(g3)[2] != edmondsKarp(g3)[2]
 

@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Azzaare/NetworkFlows.jl.svg?branch=master)](https://travis-ci.org/Azzaare/NetworkFlows.jl)
 
-The documentation is still in progress.
+The documentation is still in progress (so is the package).
 
 NetworkFlows.jl is a Julia package that provides network flows algorithms. The design of this package is based on simple and fast flow algorithms. On mid/long term, it could be merged with other graphs packages in Julia (Graphs.jl,LightGraph.jl, etc).
 All data structures and algorithms are implemented in *pure Julia*, and thus they are portable.
@@ -21,7 +21,7 @@ The network/graph structure used in *NetworkFlows.jl* tries to optimize the acce
     - multiroute flow (Kishimoto): kishimoto(g::Network, k::Int) where k is the number of routes
     - min-cut (BFS on maxflow): mincut(g::Network)
     - Extended Multiroute Flow (k is a non-integer parameter): breakingPoints(g::Network)
-    - Multilink Attack (upper and lower bounds): mixedMLA(g::Network)
+    - Multilink Attack (upper and lower bounds; success rate): mixedMLA(g::Network) and successMLA(g::Network)
 
 
 ### Documentation (starter)
