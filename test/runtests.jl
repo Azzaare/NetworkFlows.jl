@@ -45,8 +45,8 @@ import NetworkFlows.bfs
 println("BFS: ",bfs(g3,:Path))
 
 ## Test flow.jl
-import NetworkFlows.edmondsKarp, NetworkFlows.connectivity
-import NetworkFlows.kishimoto
+# import NetworkFlows.edmondsKarp, NetworkFlows.connectivity
+# import NetworkFlows.kishimoto
 @test edmondsKarp(g3)[1] == 12
 @test connectivity(g3) == 4
 @test edmondsKarp(gdimacs)[1] == 15
@@ -65,7 +65,7 @@ import NetworkFlows.mincut
 @test mincut(g3)[2] != edmondsKarp(g3)[2]
 
 # Test extmrflow
-import NetworkFlows.breakingPoints
+# import NetworkFlows.breakingPoints
 @test breakingPoints(g4) ==
   [(0.,0.,4),(1.0,4.0,3),(2.0,7.0,2),(4.0,11.0,1),(8.0,15.0,0)]
 edges3 =
@@ -75,7 +75,7 @@ g5 = Network(edges3,true,1,6)
   [(0.0,0.0,4),(-1.0,-1.0,3),(-1.0,-1.0,2),(2.0,8.0,1),(4.0,14.0,0)]
 
   # Test mla.jl
-  import NetworkFlows.mixedMLA, NetworkFlows.successMLA
+  # import NetworkFlows.mixedMLA, NetworkFlows.successMLA
   edges4 = [(1,2,2.),(1,3,3.),(1,4,5.),(2,5,2.),(3,5,3.),(4,5,5.),
     (5,6,3.),(5,7,3.),(5,8,3.),(6,9,3.),(7,9,3.),(8,9,3.),
     (9,10,7.),(9,11,7.),(10,12,7.),(11,12,7.)]
