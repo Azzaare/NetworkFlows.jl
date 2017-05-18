@@ -2,7 +2,8 @@
 
 [![Build Status](https://travis-ci.org/Azzaare/NetworkFlows.jl.svg?branch=master)](https://travis-ci.org/Azzaare/NetworkFlows.jl)
 
-The documentation is still in progress (so is the package).
+This package development is currently stopped. All the functionalities have been added to LightGraphs.jl and LightGraphsExtras.jl. No speed efficiency comparison have done though.
+I will maintain the package for the next updates of Julia till v1.0.
 
 NetworkFlows.jl is a Julia package that provides network flows algorithms. The design of this package is based on simple and fast flow algorithms. On mid/long term, it could be merged with other graphs packages in Julia (Graphs.jl,LightGraph.jl, etc).
 All data structures and algorithms are implemented in *pure Julia*, and thus they are portable.
