@@ -2,8 +2,8 @@
 
 # Link is used to define natural encoding of networks by users
 # i.e. (tail,head,[capacity])
-typealias Link Tuple{Int,Int,Float64}
-typealias SimpleLink Tuple{Int,Int} # Unweighted links
+const Link = Tuple{Int,Int,Float64}
+const SimpleLink = Tuple{Int,Int} # Unweighted links
 
 function weightLink(l::SimpleLink,c::Float64)
   Link(l[1],l[2],c)
